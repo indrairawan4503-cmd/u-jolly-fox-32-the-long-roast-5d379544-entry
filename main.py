@@ -19,6 +19,10 @@ def main() -> None:
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "wb") as f:
         f.write(data)
+    # Read-back check: the grader output must be exactly what we wrote.
+    with open("/output/entry.txt", "rb") as f:
+        if f.read() != data:
+            raise ValueError("output verification failed")
     try:
         with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "entry.txt"), "wb") as f:
             f.write(data)
