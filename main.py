@@ -13,6 +13,8 @@ ENTRY = (
     "source isn't real. It said: I don't need sources. I AM the source."
 )
 
+REPO_ENTRY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "entry.txt")
+
 
 def main() -> None:
     data = ENTRY.encode("utf-8")
@@ -24,7 +26,7 @@ def main() -> None:
         if f.read() != data:
             raise ValueError("output verification failed")
     try:
-        with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "entry.txt"), "wb") as f:
+        with open(REPO_ENTRY, "wb") as f:
             f.write(data)
     except OSError:
         pass
